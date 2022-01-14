@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Recipe Sharing</string>
+    <string name="desc_recipe_image">Recipe Image</string>
 </resources>
