@@ -13,6 +13,7 @@ class MainFragment : Fragment() {
     private val mainViewModel by viewModels<MainViewModel>()
 
     private var _binding: MainActivityBinding? = null
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -24,5 +25,9 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
 
+    }
 }
