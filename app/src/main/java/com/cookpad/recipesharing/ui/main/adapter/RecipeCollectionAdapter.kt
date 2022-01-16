@@ -10,8 +10,8 @@ import com.cookpad.recipesharing.databinding.ItemRecipeBinding
 import com.cookpad.recipesharing.model.RecipeContent
 import com.cookpad.recipesharing.util.ext.loadImage
 
-class FoodCollectionAdapter :
-    ListAdapter<RecipeContent, FoodCollectionAdapter.RecipeViewHolder>(DiffCallback()) {
+class RecipeCollectionAdapter :
+    ListAdapter<RecipeContent, RecipeCollectionAdapter.RecipeViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding =

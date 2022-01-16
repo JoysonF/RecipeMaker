@@ -10,9 +10,7 @@ data class RecipeContent(
     @SerializedName("preview_image_urls")
     val previewImageUrls: List<String>,
     @SerializedName("recipe_count")
-    val recipeCount: Int,
+    val recipe_count: Int,
     @SerializedName("title")
     val title: String
-) {
-
-}
+)
