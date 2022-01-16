@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.cookpad.recipesharing.databinding.MainActivityBinding
 
 class MainFragment : Fragment() {
@@ -22,12 +23,19 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = MainActivityBinding.inflate(inflater, container, false)
+        observeRecipe()
         return binding.root
     }
+
+    private fun observeRecipe() {
+        lifecycleScope.launchWhenStarted {
+            //TODO set the adapter
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-
     }
 }
