@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cookpad.recipesharing.R
 import com.cookpad.recipesharing.data.Result
 import com.cookpad.recipesharing.databinding.MainFragmentBinding
-import com.cookpad.recipesharing.model.RecipeContent
+import com.cookpad.recipesharing.model.food.FoodContent
 import com.cookpad.recipesharing.ui.main.adapter.RecipeCollectionAdapter
 import com.cookpad.recipesharing.util.ext.hide
 import com.cookpad.recipesharing.util.ext.show
@@ -28,12 +28,12 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val recipeAdapter by lazy {
-        RecipeCollectionAdapter { recipeContent: RecipeContent -> recipeItemClick(recipeContent) }
+        RecipeCollectionAdapter { foodContent: FoodContent -> recipeItemClick(foodContent) }
     }
 
-    private fun recipeItemClick(recipeContent: RecipeContent) {
-        Log.d("Item clicked", "recipeItemClick: $recipeContent")
-        navigateToDetail(recipeContent)
+    private fun recipeItemClick(foodContent: FoodContent) {
+        Log.d("Item clicked", "recipeItemClick: $foodContent")
+        navigateToDetail(foodContent)
     }
 
     override fun onCreateView(
@@ -70,7 +70,7 @@ class MainFragment : Fragment() {
     }
 
     private fun observeRecipe() {
-        mainViewModel.recipeCollection.observe(viewLifecycleOwner) { response ->
+        mainViewModel.foodCollection.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Error -> {
                     showLoading(false)
@@ -91,7 +91,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setAdapter(data: List<RecipeContent>) {
+    private fun setAdapter(data: List<FoodContent>) {
         binding.errorMsg.hide()
         recipeAdapter.submitList(data)
     }
@@ -100,10 +100,10 @@ class MainFragment : Fragment() {
         binding.pullDownRefreshLayout.isRefreshing = isLoading
     }
 
-    private fun navigateToDetail(recipeContent: RecipeContent) {
+    private fun navigateToDetail(foodContent: FoodContent) {
         val action =
             MainFragmentDirections.navigateToDetailFragment(
-                recipeContent
+                foodContent
             )
         findNavController().navigate(action)
     }

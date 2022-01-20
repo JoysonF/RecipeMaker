@@ -7,9 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import com.cookpad.recipesharing.R
+import com.cookpad.recipesharing.data.Result
 import com.cookpad.recipesharing.databinding.DetailFragmentBinding
-import com.cookpad.recipesharing.model.RecipeContent
+import com.cookpad.recipesharing.model.food.FoodContent
+import com.cookpad.recipesharing.model.recipe.Recipe
+import com.cookpad.recipesharing.util.ext.hide
+import com.cookpad.recipesharing.util.ext.show
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private var _binding: DetailFragmentBinding? = null
@@ -17,9 +25,13 @@ class DetailFragment : Fragment() {
 
     private val args by navArgs<DetailFragmentArgs>()
 
-    private lateinit var recipeAdapter: ViewPagerAdapter
+    private lateinit var recipeViewPagerAdapter: ViewPagerAdapter
 
     private val detailViewModel by viewModels<DetailViewModel>()
+
+    private val recipeAdapter by lazy {
+        RecipeListAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,27 +40,75 @@ class DetailFragment : Fragment() {
     ): View {
         _binding = DetailFragmentBinding.inflate(inflater, container, false)
         setData(args.selectedRecipe)
+        observeRecipe()
+        detailViewModel.getAllRecipes(args.selectedRecipe.id)
         return binding.root
     }
 
-
-    private fun setData(selectedRecipe: RecipeContent) {
-        binding.apply {
-            tvTitle.text = selectedRecipe.title
-            tvDescription.text = selectedRecipe.description
-            tvRecipeCount.text = "Total Recipe Count: " + selectedRecipe.recipe_count
-            setAdapter(selectedRecipe)
+    private fun observeRecipe() {
+        detailViewModel.recipeCollection.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Result.Error -> {
+                    showLoading(false)
+                }
+                Result.Loading -> {
+                    showLoading(true)
+                }
+                is Result.Success -> {
+                    if (response.data.isNotEmpty()) {
+                        setRecipeAdapter(response.data)
+                        showLoading(false)
+                    } else {
+                        binding.errorMsg.show()
+                        binding.errorMsg.text = getString(R.string.msg_no_recipes)
+                    }
+                }
+            }
         }
     }
 
-    private fun setAdapter(selectedRecipe: RecipeContent) {
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressLoader.show()
+        } else {
+            binding.progressLoader.hide()
+        }
+    }
+
+
+    private fun setData(selectedFood: FoodContent) {
         binding.apply {
-            recipeAdapter = ViewPagerAdapter(selectedRecipe.previewImageUrls)
-            recipeViewPager.apply {
+            tvTitle.text = selectedFood.title
+            tvDescription.text = selectedFood.description
+            tvRecipeCount.text = "Total Recipe Count: " + selectedFood.recipe_count
+            setViewPagerAdapter(selectedFood)
+            setRecyclerViewAdapter()
+        }
+    }
+
+    private fun setRecyclerViewAdapter() {
+        binding.apply {
+            recipeList.apply {
+                layoutManager = GridLayoutManager(context, 2)
                 adapter = recipeAdapter
+            }
+        }
+
+    }
+
+    private fun setViewPagerAdapter(selectedFood: FoodContent) {
+        binding.apply {
+            recipeViewPagerAdapter = ViewPagerAdapter(selectedFood.previewImageUrls)
+            recipeViewPager.apply {
+                adapter = recipeViewPagerAdapter
                 binding.wormDotsIndicator.setViewPager2(recipeViewPager)
             }
         }
+    }
+
+    private fun setRecipeAdapter(data: List<Recipe>) {
+        binding.errorNoRecipe.hide()
+        recipeAdapter.submitList(data)
     }
 
     override fun onDestroy() {

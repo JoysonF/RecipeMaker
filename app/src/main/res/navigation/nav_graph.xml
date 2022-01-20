@@ -23,7 +23,7 @@
         tools:layout="@layout/detail_fragment">
         <argument
             android:name="selectedRecipe"
-            app:argType="com.cookpad.recipesharing.model.RecipeContent"
+            app:argType="com.cookpad.recipesharing.model.food.FoodContent"
             />
     </fragment>
 

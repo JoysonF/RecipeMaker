@@ -6,18 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cookpad.recipesharing.R
-import com.cookpad.recipesharing.databinding.ItemRecipeBinding
-import com.cookpad.recipesharing.model.RecipeContent
+import com.cookpad.recipesharing.databinding.ItemFoodBinding
+import com.cookpad.recipesharing.model.food.FoodContent
+import com.cookpad.recipesharing.ui.detail.ViewPagerAdapter
 import com.cookpad.recipesharing.util.ext.loadImage
 
 class RecipeCollectionAdapter constructor(
-    val itemClickListener: (RecipeContent) -> Unit
+    val itemClickListener: (FoodContent) -> Unit
 ) :
-    ListAdapter<RecipeContent, RecipeCollectionAdapter.RecipeViewHolder>(DiffCallback()) {
+    ListAdapter<FoodContent, RecipeCollectionAdapter.RecipeViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding =
-            ItemRecipeBinding.inflate(
+            ItemFoodBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -29,10 +30,10 @@ class RecipeCollectionAdapter constructor(
         holder.bind(getItem(position))
     }
 
-    inner class RecipeViewHolder(private val binding: ItemRecipeBinding) :
+    inner class RecipeViewHolder(private val binding: ItemFoodBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(model: RecipeContent) {
+        fun bind(model: FoodContent) {
             binding.apply {
                 recipeTitle.text = model.title
                 recipeHeadline.text = model.description
@@ -61,11 +62,11 @@ class RecipeCollectionAdapter constructor(
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<RecipeContent>() {
-        override fun areItemsTheSame(oldItem: RecipeContent, newItem: RecipeContent) =
+    class DiffCallback : DiffUtil.ItemCallback<FoodContent>() {
+        override fun areItemsTheSame(oldItem: FoodContent, newItem: FoodContent) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: RecipeContent, newItem: RecipeContent) =
+        override fun areContentsTheSame(oldItem: FoodContent, newItem: FoodContent) =
             oldItem == newItem
     }
 }

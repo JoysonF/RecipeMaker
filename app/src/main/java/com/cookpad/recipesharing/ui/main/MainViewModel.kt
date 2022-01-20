@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cookpad.recipesharing.R
-import com.cookpad.recipesharing.data.source.repository.RecipeCollectionRepository
-import com.cookpad.recipesharing.model.RecipeContent
+import com.cookpad.recipesharing.data.source.repository.food.FoodCollectionRepository
+import com.cookpad.recipesharing.model.food.FoodContent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.cookpad.recipesharing.data.Result
 import com.cookpad.recipesharing.di.IoDispatcher
@@ -18,12 +18,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: RecipeCollectionRepository,
+    private val repository: FoodCollectionRepository,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _recipeCollection = MutableLiveData<Result<List<RecipeContent>>>()
-    val recipeCollection: LiveData<Result<List<RecipeContent>>>
+    private val _recipeCollection = MutableLiveData<Result<List<FoodContent>>>()
+    val foodCollection: LiveData<Result<List<FoodContent>>>
         get() = _recipeCollection
 
     /**

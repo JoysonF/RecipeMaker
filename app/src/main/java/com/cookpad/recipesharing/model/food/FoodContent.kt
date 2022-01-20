@@ -1,11 +1,11 @@
-package com.cookpad.recipesharing.model
+package com.cookpad.recipesharing.model.food
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RecipeContent(
+data class FoodContent(
     @SerializedName("description")
     val description: String,
     @SerializedName("id")

@@ -7,6 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailFragment">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/errorMsg"
+        style="@style/ErrorStatusView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/recipeViewPager"
@@ -70,6 +94,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         tools:text="Recipe Count" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/errorNoRecipe"
+        style="@style/ErrorStatusView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_32"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_8"
+        android:text="No Recipes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecipeCount" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipeList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecipeCount" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
