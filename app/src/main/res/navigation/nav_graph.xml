@@ -9,5 +9,20 @@
         android:id="@+id/mainFragment"
         android:name="com.cookpad.recipesharing.ui.main.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/navigateToDetailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
+        <argument
+            android:name="id"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.cookpad.recipesharing.ui.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" />
+
 </navigation>

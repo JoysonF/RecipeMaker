@@ -10,7 +10,9 @@ import com.cookpad.recipesharing.databinding.ItemRecipeBinding
 import com.cookpad.recipesharing.model.RecipeContent
 import com.cookpad.recipesharing.util.ext.loadImage
 
-class RecipeCollectionAdapter :
+class RecipeCollectionAdapter constructor(
+    val itemClickListener: (RecipeContent) -> Unit
+) :
     ListAdapter<RecipeContent, RecipeCollectionAdapter.RecipeViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
@@ -41,6 +43,10 @@ class RecipeCollectionAdapter :
                     placeholderImage = R.drawable.ic_food_placeholder,
                     error = R.drawable.ic_error_image
                 )
+
+                root.setOnClickListener {
+                    itemClickListener(model)
+                }
             }
         }
 

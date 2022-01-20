@@ -26,7 +26,6 @@ class MainViewModel @Inject constructor(
     val recipeCollection: LiveData<Result<List<RecipeContent>>>
         get() = _recipeCollection
 
-
     /**
      * Used for one time events to notify the views ..like network errors / api errors
      */

@@ -1,11 +1,14 @@
 package com.cookpad.recipesharing.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cookpad.recipesharing.R
 import com.cookpad.recipesharing.data.Result
@@ -26,7 +29,12 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val recipeAdapter by lazy {
-        RecipeCollectionAdapter()
+        RecipeCollectionAdapter { recipeContent: RecipeContent -> recipeItemClick(recipeContent) }
+    }
+
+    private fun recipeItemClick(recipeContent: RecipeContent) {
+        Log.d("Item clicked", "recipeItemClick: $recipeContent")
+        navigateToDetail()
     }
 
     override fun onCreateView(
@@ -91,6 +99,11 @@ class MainFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.pullDownRefreshLayout.isRefreshing = isLoading
+    }
+
+    private fun navigateToDetail() {
+        val bundle = bundleOf("amount" to 10)
+        binding.root.findNavController().navigate(R.id.navigateToDetailFragment, bundle)
     }
 
     override fun onDestroyView() {
