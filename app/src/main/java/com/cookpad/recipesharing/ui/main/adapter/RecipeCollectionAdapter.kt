@@ -34,7 +34,8 @@ class RecipeCollectionAdapter constructor(
 
         fun bind(model: RecipeContent) {
             binding.apply {
-                recipeTitle.text = model.description
+                recipeTitle.text = model.title
+                recipeHeadline.text = model.description
 
                 val displayImage = getDisplayImage(model.previewImageUrls)
 
