@@ -1,4 +1,4 @@
-package com.cookpad.recipesharing.ui.detail
+package com.cookpad.recipesharing.ui.recipe.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +9,11 @@ import com.cookpad.recipesharing.R
 import com.cookpad.recipesharing.databinding.ItemRecipeBinding
 import com.cookpad.recipesharing.model.recipe.Recipe
 import com.cookpad.recipesharing.util.ext.loadImage
+import javax.inject.Inject
 
-class RecipeListAdapter : ListAdapter<Recipe, RecipeListAdapter.ViewHolder>(DiffCallback()) {
+class RecipeListAdapter @Inject constructor(
+    private val onRecipeItemClick: (recipe: Recipe) -> Unit
+) : ListAdapter<Recipe, RecipeListAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -32,11 +35,16 @@ class RecipeListAdapter : ListAdapter<Recipe, RecipeListAdapter.ViewHolder>(Diff
         fun bind(recipe: Recipe) {
             binding.apply {
                 recipeTitle.text = recipe.title
-                imageView.loadImage(
+
+                imgFoodCollection.loadImage(
                     recipe.imageUrl,
                     R.drawable.ic_food_placeholder,
                     R.drawable.ic_error_image
                 )
+
+                binding.root.setOnClickListener {
+                    onRecipeItemClick(recipe)
+                }
             }
         }
     }

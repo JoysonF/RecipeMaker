@@ -90,7 +90,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
-
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
     //Coroutines
     def coroutine_version = "1.5.1"

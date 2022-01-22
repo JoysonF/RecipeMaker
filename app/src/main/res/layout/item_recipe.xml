@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/dimen_8"
+    android:layout_marginHorizontal="2dp"
     android:background="@android:color/white"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/dimen_12"
@@ -21,7 +21,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgFoodCollection"
             style="@style/RecipeImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -34,28 +34,12 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/recipe_title"
-            style="@style/RecipeTitleText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:padding="@dimen/dimen_8"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            android:id="@+id/recipeTitle"
+            style="@style/RecipeTitleTextViewHolder"
+            app:layout_constraintEnd_toStartOf="@+id/imgFoodCollection"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imgFoodCollection"
             tools:text="with Sweet Potato Wedges and Minted Snap Peas" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/recipe_headline"
-            style="@style/RecipeDescText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:padding="@dimen/dimen_8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recipe_title"
-            tools:text="@tools:sample/full_names" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
