@@ -1,29 +1,29 @@
-package com.cookpad.recipesharing.ui.main
+package com.cookpad.recipesharing.ui.food.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cookpad.recipesharing.R
-import com.cookpad.recipesharing.data.source.repository.food.FoodCollectionRepository
-import com.cookpad.recipesharing.model.food.FoodContent
-import dagger.hilt.android.lifecycle.HiltViewModel
 import com.cookpad.recipesharing.data.Result
+import com.cookpad.recipesharing.data.source.repository.recipe.RecipeCollectionRepository
 import com.cookpad.recipesharing.di.IoDispatcher
+import com.cookpad.recipesharing.model.recipe.Recipe
 import com.cookpad.recipesharing.util.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val repository: FoodCollectionRepository,
+class FoodDetailViewModel @Inject constructor(
+    private val repository: RecipeCollectionRepository,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _recipeCollection = MutableLiveData<Result<List<FoodContent>>>()
-    val foodCollection: LiveData<Result<List<FoodContent>>>
+    private val _recipeCollection = MutableLiveData<Result<List<Recipe>>>()
+    val recipeCollection: LiveData<Result<List<Recipe>>>
         get() = _recipeCollection
 
     /**
@@ -35,22 +35,18 @@ class MainViewModel @Inject constructor(
         return actionEvent
     }
 
-    init {
-        getRecipeCollection()
-    }
-
-    fun getRecipeCollection() {
-        viewModelScope.launch(dispatcher) {
+    fun getAllRecipes(collectionId: Int) {
+        runCatching {
             _recipeCollection.postValue(Result.Loading)
-            runCatching {
-                val recipeCollection = repository.getRecipeCollection()
-                _recipeCollection.postValue(Result.Success(recipeCollection))
-            }.onFailure {
-                _recipeCollection.postValue(it.message?.let { msg ->
-                    Result.Error(msg)
-                })
-                actionEvent.postValue(handleError(it))
+            viewModelScope.launch(dispatcher) {
+                val response = repository.getAllRecipes(collectionId.toString())
+                _recipeCollection.postValue(Result.Success(response))
             }
+        }.onFailure {
+            _recipeCollection.postValue(it.message?.let { msg ->
+                Result.Error(msg)
+            })
+            actionEvent.postValue(handleError(it))
         }
     }
 
@@ -61,5 +57,4 @@ class MainViewModel @Inject constructor(
         is IOException -> R.string.error_no_connection
         else -> R.string.error_server
     }
-
 }

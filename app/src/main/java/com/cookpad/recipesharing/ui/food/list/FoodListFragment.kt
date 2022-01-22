@@ -1,4 +1,4 @@
-package com.cookpad.recipesharing.ui.main
+package com.cookpad.recipesharing.ui.food.list
 
 import android.os.Bundle
 import android.util.Log
@@ -11,28 +11,27 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cookpad.recipesharing.R
 import com.cookpad.recipesharing.data.Result
-import com.cookpad.recipesharing.databinding.MainFragmentBinding
+import com.cookpad.recipesharing.databinding.FoodListFragmentBinding
 import com.cookpad.recipesharing.model.food.FoodContent
-import com.cookpad.recipesharing.ui.main.adapter.RecipeCollectionAdapter
+import com.cookpad.recipesharing.ui.food.adapter.FoodCollectionAdapter
 import com.cookpad.recipesharing.util.ext.hide
 import com.cookpad.recipesharing.util.ext.show
 import com.cookpad.recipesharing.util.ext.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class FoodListFragment : Fragment() {
 
-    private val mainViewModel by viewModels<MainViewModel>()
+    private val mainViewModel by viewModels<FoodListViewModel>()
 
-    private var _binding: MainFragmentBinding? = null
+    private var _binding: FoodListFragmentBinding? = null
     private val binding get() = _binding!!
 
     private val recipeAdapter by lazy {
-        RecipeCollectionAdapter { foodContent: FoodContent -> recipeItemClick(foodContent) }
+        FoodCollectionAdapter { foodContent: FoodContent -> recipeItemClick(foodContent) }
     }
 
     private fun recipeItemClick(foodContent: FoodContent) {
-        Log.d("Item clicked", "recipeItemClick: $foodContent")
         navigateToDetail(foodContent)
     }
 
@@ -40,10 +39,10 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        _binding = FoodListFragmentBinding.inflate(inflater, container, false)
         initViews()
         observeRecipe()
-        observeActionEvent()
+        observeErrorEvent()
         mainViewModel.getRecipeCollection()
         return binding.root
     }
@@ -61,7 +60,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun observeActionEvent() {
+    private fun observeErrorEvent() {
         mainViewModel.getErrorMsg().observe(this) { msgId ->
             binding.root.showSnackBar(getString(msgId)) {
                 mainViewModel.getRecipeCollection()
@@ -80,11 +79,13 @@ class MainFragment : Fragment() {
                 }
                 is Result.Success -> {
                     if (response.data.isNotEmpty()) {
+                        binding.noData.hide()
                         setAdapter(response.data)
                         showLoading(false)
                     } else {
-                        binding.errorMsg.show()
-                        binding.errorMsg.text = getString(R.string.msg_no_recipes)
+                        showLoading(false)
+                        binding.noData.show()
+                        binding.noData.text = getString(R.string.msg_no_recipes)
                     }
                 }
             }
@@ -92,17 +93,29 @@ class MainFragment : Fragment() {
     }
 
     private fun setAdapter(data: List<FoodContent>) {
-        binding.errorMsg.hide()
+        binding.noData.hide()
         recipeAdapter.submitList(data)
     }
 
     private fun showLoading(isLoading: Boolean) {
         binding.pullDownRefreshLayout.isRefreshing = isLoading
+
+        if (isLoading) {
+            binding.apply {
+                shimmerViewContainer.startShimmerAnimation()
+            }
+
+        } else {
+            binding.apply {
+                shimmerViewContainer.stopShimmerAnimation()
+                shimmerViewContainer.visibility = View.GONE
+            }
+        }
     }
 
     private fun navigateToDetail(foodContent: FoodContent) {
         val action =
-            MainFragmentDirections.navigateToDetailFragment(
+            FoodListFragmentDirections.navigateToDetailFragment(
                 foodContent
             )
         findNavController().navigate(action)

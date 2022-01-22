@@ -1,4 +1,4 @@
-package com.cookpad.recipesharing.ui.main.adapter
+package com.cookpad.recipesharing.ui.food.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cookpad.recipesharing.R
 import com.cookpad.recipesharing.databinding.ItemFoodBinding
 import com.cookpad.recipesharing.model.food.FoodContent
-import com.cookpad.recipesharing.ui.detail.ViewPagerAdapter
 import com.cookpad.recipesharing.util.ext.loadImage
 
-class RecipeCollectionAdapter constructor(
+class FoodCollectionAdapter constructor(
     val itemClickListener: (FoodContent) -> Unit
 ) :
-    ListAdapter<FoodContent, RecipeCollectionAdapter.RecipeViewHolder>(DiffCallback()) {
+    ListAdapter<FoodContent, FoodCollectionAdapter.RecipeViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding =
@@ -36,16 +35,15 @@ class RecipeCollectionAdapter constructor(
         fun bind(model: FoodContent) {
             binding.apply {
                 recipeTitle.text = model.title
-                recipeHeadline.text = model.description
+                tvDescription.text = model.description
 
                 val displayImage = getDisplayImage(model.previewImageUrls)
 
-                imageView.loadImage(
+                imgFoodCollection.loadImage(
                     url = displayImage,
                     placeholderImage = R.drawable.ic_food_placeholder,
                     error = R.drawable.ic_error_image
                 )
-
                 root.setOnClickListener {
                     itemClickListener(model)
                 }

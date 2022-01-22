@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.cookpad.recipesharing.ui.main.MainFragment"
+        android:name="com.cookpad.recipesharing.ui.food.list.FoodListFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment">
+        tools:layout="@layout/food_list_fragment">
         <action
             android:id="@+id/navigateToDetailFragment"
             app:destination="@id/detailFragment"
@@ -18,13 +18,24 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.cookpad.recipesharing.ui.detail.DetailFragment"
+        android:name="com.cookpad.recipesharing.ui.food.detail.FoodDetailFragment"
         android:label="detail_fragment"
         tools:layout="@layout/detail_fragment">
         <argument
             android:name="selectedRecipe"
-            app:argType="com.cookpad.recipesharing.model.food.FoodContent"
-            />
+            app:argType="com.cookpad.recipesharing.model.food.FoodContent" />
+        <action
+            android:id="@+id/action_detailFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.cookpad.recipesharing.ui.recipe.details.RecipeDetailsFragment"
+        android:label="recipe_details_fragment"
+        tools:layout="@layout/recipe_details_fragment">
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

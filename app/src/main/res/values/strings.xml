@@ -2,7 +2,12 @@
     <string name="app_name">Recipe Sharing</string>
     <string name="desc_recipe_image">Recipe Image</string>
     <string name="action_retry">Retry</string>
+    <string name="label_published_at">Published at : </string>
+    <string name="label_total_recipe_count">"Total Recipe Count: " </string>
     <string name="msg_no_recipes">No Recipes. Try again later.</string>
     <string name="error_no_connection">No Internet Connection. Please check your internet connection.</string>
     <string name="error_server">Something went wrong. Please try again later.</string>
+    <string name="steps">Steps</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="no_data">No Data...Please try again later</string>
 </resources>

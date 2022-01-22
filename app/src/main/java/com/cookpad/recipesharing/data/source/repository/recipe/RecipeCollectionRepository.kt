@@ -6,6 +6,7 @@ import javax.inject.Inject
 
 interface RecipeCollectionRepository {
     suspend fun getAllRecipes(collectionId: String): List<Recipe>
+    suspend fun getRecipe(recipeId: String): Recipe
 }
 
 class RecipeCollectionRepositoryImpl @Inject constructor(
@@ -16,4 +17,7 @@ class RecipeCollectionRepositoryImpl @Inject constructor(
         return recipeApiService.getAllRecipes(collectionId)
     }
 
+    override suspend fun getRecipe(recipeId: String): Recipe {
+        return recipeApiService.getRecipe(recipeId)
+    }
 }

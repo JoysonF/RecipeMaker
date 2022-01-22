@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 /**
- * Api Service to fetch all recipe Content .
+ * Api Service to fetch food info.
  */
 interface RecipeApiService {
 
@@ -17,4 +17,9 @@ interface RecipeApiService {
     suspend fun getAllRecipes(
         @Path("id") id: String
     ): List<Recipe>
+
+    @GET("recipes/{recipe-id}/")
+    suspend fun getRecipe(
+        @Path("recipe-id") id: String
+    ): Recipe
 }

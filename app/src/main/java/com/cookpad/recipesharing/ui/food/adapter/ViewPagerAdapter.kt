@@ -1,9 +1,7 @@
-package com.cookpad.recipesharing.ui.detail
+package com.cookpad.recipesharing.ui.food.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.cookpad.recipesharing.R
 import com.cookpad.recipesharing.databinding.ItemPreviewImageBinding

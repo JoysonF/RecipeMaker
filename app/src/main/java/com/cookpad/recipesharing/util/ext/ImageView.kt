@@ -15,3 +15,16 @@ fun ImageView.loadImage(
         .error(error)
         .into(this)
 }
+
+fun ImageView.loadCircularImage(
+    url: String,
+    @DrawableRes placeholderImage: Int,
+    @DrawableRes error: Int
+) {
+    Glide.with(context)
+        .load(url)
+        .circleCrop()
+        .placeholder(placeholderImage)
+        .error(error)
+        .into(this)
+}

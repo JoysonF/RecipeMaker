@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cookpad.recipesharing.util.view.parallalx.ObservableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.recipe.details.RecipeDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.recipe.details.RecipeDetailsFragment">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            shimmer:duration="800">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/placeholder_recipe_steps_layout" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/recipeImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:contentDescription="@string/desc_recipe_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            style="@style/RecipeTitleText"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipeImage"
+            tools:text="Seafood Ehomaki (Lucky Fat Sushi Rolls)" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPublishedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/avenir_ltstd_black"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tools:text="@string/label_published_at" />
+
+        <ImageView
+            android:id="@+id/imgUserProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/dimen_8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPublishedDate"
+            tools:src="@tools:sample/avatars"
+
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/avenir_ltstd_black"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@+id/imgUserProfile"
+            app:layout_constraintStart_toEndOf="@+id/imgUserProfile"
+            app:layout_constraintTop_toTopOf="@+id/imgUserProfile"
+            tools:text="Joyson" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDescription"
+            style="@style/RecipeDescText"
+            android:layout_marginStart="@dimen/dimen_16"
+            android:layout_marginTop="@dimen/dimen_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgUserProfile"
+            tools:text="I wanted to make a nasty egg" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvIngredients"
+            style="@style/RecipeTitleText"
+            android:layout_marginStart="@dimen/dimen_8"
+            android:layout_marginTop="@dimen/dimen_16"
+            android:text="@string/ingredients"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+        <LinearLayout
+            android:id="@+id/containerIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvIngredients" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSteps"
+            style="@style/RecipeTitleText"
+            android:layout_marginStart="@dimen/dimen_8"
+            android:layout_marginTop="@dimen/dimen_16"
+            android:text="@string/steps"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/containerIngredients" />
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/stepsPagerPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSteps" />
+
+
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/worm_dots_indicator"
+            style="@style/pageIndicatorView"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stepsPagerPreview" />
+
+        <LinearLayout
+            android:id="@+id/containerSteps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/worm_dots_indicator" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.cookpad.recipesharing.util.view.parallalx.ObservableScrollView>
