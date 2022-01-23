@@ -22,16 +22,16 @@ class FoodListViewModel @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _recipeCollection = MutableLiveData<Result<List<FoodContent>>>()
+    private val _foodCollection = MutableLiveData<Result<List<FoodContent>>>()
     val foodCollection: LiveData<Result<List<FoodContent>>>
-        get() = _recipeCollection
+        get() = _foodCollection
 
     /**
      * Used for one time events to notify the views ..like network errors / api errors
      */
-    private val actionEvent: SingleLiveEvent<Int> = SingleLiveEvent()
+    private val actionEvent: SingleLiveEvent<String> = SingleLiveEvent()
 
-    fun getErrorMsg(): SingleLiveEvent<Int> {
+    fun getErrorMsg(): SingleLiveEvent<String> {
         return actionEvent
     }
 
@@ -41,12 +41,12 @@ class FoodListViewModel @Inject constructor(
 
     fun getRecipeCollection() {
         viewModelScope.launch(dispatcher) {
-            _recipeCollection.postValue(Result.Loading)
+            _foodCollection.postValue(Result.Loading)
             runCatching {
                 val recipeCollection = repository.getRecipeCollection()
-                _recipeCollection.postValue(Result.Success(recipeCollection))
+                _foodCollection.postValue(Result.Success(recipeCollection))
             }.onFailure {
-                _recipeCollection.postValue(it.message?.let { msg ->
+                _foodCollection.postValue(it.message?.let { msg ->
                     Result.Error(msg)
                 })
                 actionEvent.postValue(handleError(it))
@@ -57,9 +57,9 @@ class FoodListViewModel @Inject constructor(
     /**
      * Handle exceptions
      */
-    private fun handleError(e: Throwable): Int = when (e) {
-        is IOException -> R.string.error_no_connection
-        else -> R.string.error_server
+    private fun handleError(e: Throwable): String = when (e) {
+        is IOException -> "No Internet Connection. Please check your internet connection."
+        else -> "Something went wrong. Please try again later."
     }
 
 }

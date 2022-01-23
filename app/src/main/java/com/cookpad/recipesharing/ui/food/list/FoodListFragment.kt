@@ -1,7 +1,6 @@
 package com.cookpad.recipesharing.ui.food.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,8 +60,8 @@ class FoodListFragment : Fragment() {
     }
 
     private fun observeErrorEvent() {
-        mainViewModel.getErrorMsg().observe(this) { msgId ->
-            binding.root.showSnackBar(getString(msgId)) {
+        mainViewModel.getErrorMsg().observe(this) { msg ->
+            binding.root.showSnackBar(msg) {
                 mainViewModel.getRecipeCollection()
             }
         }

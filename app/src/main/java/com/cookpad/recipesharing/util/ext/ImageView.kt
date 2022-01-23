@@ -1,5 +1,7 @@
 package com.cookpad.recipesharing.util.ext
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
@@ -11,7 +13,7 @@ fun ImageView.loadImage(
 ) {
     Glide.with(context)
         .load(url)
-        .placeholder(placeholderImage)
+        .placeholder(ColorDrawable(Color.GRAY))
         .error(error)
         .into(this)
 }

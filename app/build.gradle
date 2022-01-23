@@ -95,9 +95,12 @@ dependencies {
     //Coroutines
     def coroutine_version = "1.5.1"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    testImplementation "io.mockk:mockk:1.12.2"
+    testImplementation 'androidx.test.ext:truth:1.4.0'
+    testImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
 
-
-    testImplementation "junit:junit:4.13.2"
 
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
