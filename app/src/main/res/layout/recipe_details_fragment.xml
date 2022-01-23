@@ -87,6 +87,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/avenir_ltstd_black"
             android:maxLines="1"
+            android:textColor="@color/textColorLight"
             app:layout_constraintBottom_toBottomOf="@+id/imgUserProfile"
             app:layout_constraintStart_toEndOf="@+id/imgUserProfile"
             app:layout_constraintTop_toTopOf="@+id/imgUserProfile"
