@@ -30,27 +30,36 @@ The project demonstrates various food collections and the recipes on how to prep
 
 ## Screenshots
 1) App architecture
+
    ![mvvm-arch](https://user-images.githubusercontent.com/6438183/150671806-f234d247-8199-4429-b92a-837d79a240de.png)
 
 2) App folder structure
+
    ![folder structure](https://user-images.githubusercontent.com/6438183/150672652-9ca769ed-e147-4d2e-b98f-7ccd97d43422.png)
    
 3) Food Collection
+
    ![list_1](https://user-images.githubusercontent.com/6438183/150672436-cf2927ba-76f3-4b91-9bb7-eaec1a84b4c3.jpeg)
 
 4) Food Details
+
    ![food_details_1](https://user-images.githubusercontent.com/6438183/150672439-5c01be2f-7a20-43d4-bae4-0c3fba4e48b4.jpeg)
+
    ![Food_details_2](https://user-images.githubusercontent.com/6438183/150672443-7d234913-8923-4023-8eed-b74688b5ecc2.jpeg)
    
 5) Recipe Collection
+
    ![Steps_1](https://user-images.githubusercontent.com/6438183/150672500-abcdb433-b13c-46c3-936e-a047b86a194f.jpeg)
 
    ![Steps_2](https://user-images.githubusercontent.com/6438183/150672449-2763e81e-e664-4698-85ec-359b10ddf68d.jpeg)
    38183/150672447-19df0eab-d8b9-48e7-8e9f-e0d8e1b15d0c.jpeg)
+
    ![Steps_3](https://user-images.githubusercontent.com/6438183/150672520-c1fe3c26-1153-4049-b4c5-32f63d00c275.jpeg)
    
 6) Tests
+
    ![tests](https://user-images.githubusercontent.com/6438183/150672658-24be4916-c823-400d-9939-30e0a279ca02.png)
+
 
 Local Development
 -----------------
