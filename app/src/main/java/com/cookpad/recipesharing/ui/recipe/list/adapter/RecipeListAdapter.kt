@@ -38,7 +38,6 @@ class RecipeListAdapter @Inject constructor(
 
                 imgFoodCollection.loadImage(
                     recipe.imageUrl,
-                    R.drawable.ic_food_placeholder,
                     R.drawable.ic_error_image
                 )
 

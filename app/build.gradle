@@ -28,6 +28,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_BASE", '"https://cookpad.github.io/global-mobile-hiring/api/"'
         }
     }
 

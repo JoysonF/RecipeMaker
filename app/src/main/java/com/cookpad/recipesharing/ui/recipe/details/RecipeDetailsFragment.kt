@@ -77,7 +77,6 @@ class RecipeDetailsFragment : Fragment() {
 
             recipeImage.loadImage(
                 recipe.imageUrl,
-                R.drawable.ic_food_placeholder,
                 R.drawable.ic_error_image
             )
 
@@ -88,7 +87,6 @@ class RecipeDetailsFragment : Fragment() {
             imgUserProfile.loadCircularImage(
                 recipe.user
                     .imageUrl,
-                R.drawable.ic_food_placeholder,
                 R.drawable.ic_error_image
             )
 

@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 
 fun ImageView.loadImage(
     url: String,
-    @DrawableRes placeholderImage: Int,
     @DrawableRes error: Int
 ) {
     Glide.with(context)
@@ -20,13 +19,12 @@ fun ImageView.loadImage(
 
 fun ImageView.loadCircularImage(
     url: String,
-    @DrawableRes placeholderImage: Int,
     @DrawableRes error: Int
 ) {
     Glide.with(context)
         .load(url)
         .circleCrop()
-        .placeholder(placeholderImage)
+        .placeholder(ColorDrawable(Color.GRAY))
         .error(error)
         .into(this)
 }

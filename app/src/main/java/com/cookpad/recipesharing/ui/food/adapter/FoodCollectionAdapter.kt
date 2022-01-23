@@ -41,7 +41,6 @@ class FoodCollectionAdapter constructor(
 
                 imgFoodCollection.loadImage(
                     url = displayImage,
-                    placeholderImage = R.drawable.ic_food_placeholder,
                     error = R.drawable.ic_error_image
                 )
                 root.setOnClickListener {

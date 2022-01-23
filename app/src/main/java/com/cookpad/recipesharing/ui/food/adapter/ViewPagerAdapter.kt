@@ -28,7 +28,6 @@ class ViewPagerAdapter constructor(
         with(holder) {
             binding.recipeImage.loadImage(
                 url = recipeImages[position],
-                placeholderImage = R.drawable.ic_food_placeholder,
                 error = R.drawable.ic_error_image
             )
         }
