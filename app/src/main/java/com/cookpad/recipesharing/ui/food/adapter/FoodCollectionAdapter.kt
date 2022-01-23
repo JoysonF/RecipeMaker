@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cookpad.recipesharing.R
 import com.cookpad.recipesharing.databinding.ItemFoodBinding
 import com.cookpad.recipesharing.model.food.FoodContent
+import com.cookpad.recipesharing.util.Const.Companion.EMPTY_STRING
 import com.cookpad.recipesharing.util.ext.loadImage
 
 class FoodCollectionAdapter constructor(
@@ -40,8 +41,7 @@ class FoodCollectionAdapter constructor(
                 val displayImage = getDisplayImage(model.previewImageUrls)
 
                 imgFoodCollection.loadImage(
-                    url = displayImage,
-                    error = R.drawable.ic_error_image
+                    url = displayImage
                 )
                 root.setOnClickListener {
                     itemClickListener(model)
@@ -51,8 +51,7 @@ class FoodCollectionAdapter constructor(
 
         private fun getDisplayImage(previewImageUrls: List<String>?): String {
             return if (previewImageUrls.isNullOrEmpty()) {
-                //TODO pass dummy image
-                ""
+                return EMPTY_STRING
             } else {
                 previewImageUrls[0]
             }

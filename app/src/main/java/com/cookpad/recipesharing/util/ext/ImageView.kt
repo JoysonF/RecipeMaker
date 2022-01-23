@@ -7,24 +7,23 @@ import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 
 fun ImageView.loadImage(
-    url: String,
-    @DrawableRes error: Int
+    url: String
 ) {
     Glide.with(context)
         .load(url)
+        .centerInside()
         .placeholder(ColorDrawable(Color.GRAY))
-        .error(error)
+        .error(ColorDrawable(Color.GRAY))
         .into(this)
 }
 
 fun ImageView.loadCircularImage(
-    url: String,
-    @DrawableRes error: Int
+    url: String
 ) {
     Glide.with(context)
         .load(url)
         .circleCrop()
         .placeholder(ColorDrawable(Color.GRAY))
-        .error(error)
+        .error(ColorDrawable(Color.GRAY))
         .into(this)
 }

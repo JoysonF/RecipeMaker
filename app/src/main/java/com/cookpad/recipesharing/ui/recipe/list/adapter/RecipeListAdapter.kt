@@ -37,8 +37,7 @@ class RecipeListAdapter @Inject constructor(
                 recipeTitle.text = recipe.title
 
                 imgFoodCollection.loadImage(
-                    recipe.imageUrl,
-                    R.drawable.ic_error_image
+                    recipe.imageUrl
                 )
 
                 binding.root.setOnClickListener {

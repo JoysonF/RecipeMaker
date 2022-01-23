@@ -76,8 +76,7 @@ class RecipeDetailsFragment : Fragment() {
             wormDotsIndicator.visibility = View.VISIBLE
 
             recipeImage.loadImage(
-                recipe.imageUrl,
-                R.drawable.ic_error_image
+                recipe.imageUrl
             )
 
             (resources.getString(R.string.label_published_at) + DateUtils.getCurrentDate(recipe.publishedAt)).also {
@@ -85,9 +84,7 @@ class RecipeDetailsFragment : Fragment() {
             }
 
             imgUserProfile.loadCircularImage(
-                recipe.user
-                    .imageUrl,
-                R.drawable.ic_error_image
+                recipe.user.imageUrl
             )
 
             tvUserName.text = recipe.user.name

@@ -27,8 +27,7 @@ class ViewPagerAdapter constructor(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         with(holder) {
             binding.recipeImage.loadImage(
-                url = recipeImages[position],
-                error = R.drawable.ic_error_image
+                url = recipeImages[position]
             )
         }
     }
