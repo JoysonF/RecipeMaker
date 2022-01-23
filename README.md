@@ -76,11 +76,9 @@ MVVM Architecture : https://developer.android.com/jetpack/guide
 
 Coroutines: https://developer.android.com/kotlin/coroutines
 
-Data Binding: https://developer.android.com/topic/libraries/data-binding
+Parallax: https://github.com/matrixxun/ImmersiveDetailSample.git
 
 View Binding: https://developer.android.com/topic/libraries/view-binding
-
-Leak Canary: https://square.github.io/leakcanary/
 
 Glide: https://github.com/bumptech/glide
 
