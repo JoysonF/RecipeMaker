@@ -61,13 +61,30 @@ The project demonstrates various food collections and the recipes on how to prep
    ![tests](https://user-images.githubusercontent.com/6438183/150672658-24be4916-c823-400d-9939-30e0a279ca02.png)
 
 
-Local Development
------------------
+## Local Development
 
 Here are some useful Gradle/adb commands for executing this project:
 
 * `./gradlew clean build` - Build the entire example and execute unit and integration tests plus lint check.
 * `./gradlew installDebug` - Install the debug apk on the current connected device.
+
+## Libraries
+
+Hilt: https://developer.android.com/training/dependency-injection/hilt-android
+
+MVVM Architecture : https://developer.android.com/jetpack/guide
+
+Coroutines: https://developer.android.com/kotlin/coroutines
+
+Data Binding: https://developer.android.com/topic/libraries/data-binding
+
+View Binding: https://developer.android.com/topic/libraries/view-binding
+
+Leak Canary: https://square.github.io/leakcanary/
+
+Glide: https://github.com/bumptech/glide
+
+Retrofit: https://square.github.io/retrofit/
 
 
 ## Troubleshooting
